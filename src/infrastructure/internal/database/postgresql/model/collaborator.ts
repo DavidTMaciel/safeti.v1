@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { CompanyModel } from "./company";
 
 @Entity()
 class CollaboratorModel {
@@ -14,8 +15,9 @@ class CollaboratorModel {
     @Column({ type: 'varchar', length: '255' })
     public constructions: string;
 
-    @Column({ type: 'varchar', length: '255' })
-    public company: string;
+    @ManyToOne(() => CompanyModel, company => company.collaborators)
+    @JoinColumn({ name: 'companyID', referencedColumnName: 'companyID' })
+    public company: CompanyModel;
 
     @Column({ type: 'timestamp', nullable: true, update: false, name: 'created_at' })
     public createdAt: Date;
@@ -28,7 +30,7 @@ class CollaboratorModel {
         name: string,
         office: string,
         constructions: string,
-        company: string,
+        company: CompanyModel,
         createdAt: Date,
         updatedAt: Date
     ) {
