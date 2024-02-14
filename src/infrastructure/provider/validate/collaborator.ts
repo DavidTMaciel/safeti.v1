@@ -3,17 +3,17 @@ import { UpdateCollaboratorUseCaseRequest } from "../../../domain/usecase/ucio/c
 import { GetCollaboratorByIDUseCaseRequest } from "../../../domain/usecase/ucio/collaborator";
 import { DeleteCollaboratorUseCaseRequest } from "../../../domain/usecase/ucio/collaborator";
 import { CreateCollaboratorUseCaseValidateInterface, DeleteCollaboratorUseCaseValidateInterface, GetCollaboratorByIDUseCaseValidateInterface, UpdateCollaboratorUseCaseValidateInterface } from "../../../domain/usecase/validate/collaborator";
-import { checkNumberEmpty, checkStringEmpty } from "./validate";
+import { checkEmpty, checkNumberEmpty, checkStringEmpty } from "./validate";
 
 class CreateCollaboratorUseCaseValidate implements CreateCollaboratorUseCaseValidateInterface {
     async createCollaborator(req: CreateCollaboratorUseCaseRequest): Promise<string | null> {
-        if (checkStringEmpty(req.name)) return "O Modelo não pode ser vazio"
+        if (checkStringEmpty(req.name)) return "O Nome não pode ser vazio"
 
-        if (checkStringEmpty(req.company)) return "O Ano não pode ser vazio"
+        if (checkEmpty(req.company)) return "A empresa não pode ser vazio"
 
-        if (checkStringEmpty(req.constructions)) return "A Marca não pode ser vazia"
+        if (checkStringEmpty(req.constructions)) return "A Obra não pode ser vazia"
 
-        if (checkStringEmpty(req.office)) return "A cor não pode ser vazia"
+        if (checkStringEmpty(req.office)) return "A função não pode ser vazia"
 
         return null
     }
@@ -21,13 +21,13 @@ class CreateCollaboratorUseCaseValidate implements CreateCollaboratorUseCaseVali
 
 class UpdateCollaboratorUseCaseValidate implements UpdateCollaboratorUseCaseValidateInterface {
     async updateCollaborator(req: UpdateCollaboratorUseCaseRequest): Promise<string | null> {
-        if (checkStringEmpty(req.name)) return "O Modelo não pode ser vazio"
+        if (checkStringEmpty(req.name)) return "O Nome não pode ser vazio"
 
-        if (checkStringEmpty(req.company)) return "O Ano não pode ser vazio"
+        if (checkEmpty(req.company)) return "A empresa não pode ser vazio"
 
-        if (checkStringEmpty(req.constructions)) return "A Marca não pode ser vazia"
+        if (checkStringEmpty(req.constructions)) return "A Obra não pode ser vazia"
 
-        if (checkStringEmpty(req.office)) return "A cor não pode ser vazia"
+        if (checkStringEmpty(req.office)) return "A função não pode ser vazia"
         return null;
     }
 }
