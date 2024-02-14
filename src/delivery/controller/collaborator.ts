@@ -9,7 +9,7 @@ import { SuccessResponse } from "../response/response";
 class CreateCollaboratorController {
     async createCollaborator(req: Request, res: Response): Promise<void> {
         const { name, office, constructions, company } = req.body
-        console.log(req.body)
+
         const ucReq = new CreateCollaboratorUseCaseRequest(name, office, constructions, company)
         const validate = new CreateCollaboratorUseCaseValidate()
         const repository = new CreateCollaboratorUseCaseRepository()
@@ -46,7 +46,7 @@ class GetCollaboratorByIDController {
         const usecase = new GetCollaboratorByIDUseCase(validate, repository)
 
         const ucRes = await usecase.getCollaboratorByID(ucReq)
-
+        console.log("controller",ucRes)
         new SuccessResponse().success(res, ucRes)
     }
 }
