@@ -1,13 +1,16 @@
 import { CollaboratorEntity } from "../../../../../domain/entity/collaborator";
 import { CollaboratorModel } from "../model/collaborator";
+import { toCompanyEntity, toCompanyModel } from "./company";
 
 
 function toCollaboratorModel(e: CollaboratorEntity): CollaboratorModel {
-    return new CollaboratorModel(e.ID, e.name, e.office, e.constructions, e.company, e.createdAt, e.updatedAt)
+    const companyModel = toCompanyModel(e.company)
+    return new CollaboratorModel(e.ID, e.name, e.office, e.constructions, companyModel, e.createdAt, e.updatedAt)
 }
 
 function toCollaboratorEntity(m: CollaboratorModel): CollaboratorEntity {
-    return new CollaboratorEntity(m.ID, m.name, m.office, m.constructions, m.company, m.createdAt, m.updatedAt)
+    const companyEntity = toCompanyEntity(m.company)
+    return new CollaboratorEntity(m.ID, m.name, m.office, m.constructions, companyEntity, m.createdAt, m.updatedAt)
 }
 
 export {
