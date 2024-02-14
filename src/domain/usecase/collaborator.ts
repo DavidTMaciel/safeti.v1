@@ -22,7 +22,7 @@ class CreateCollaboratorUseCase {
                 const collaborator = new CollaboratorEntity(null, req.name, req.office, req.constructions, req.company, now, now)
                 const data = await this.repository.createCollaborator(collaborator)
 
-                return new CreateCollaboratorUseCaseResponse(data, null)
+                return await new CreateCollaboratorUseCaseResponse(data, null)
             } else {
                 console.log(TAG_PRE_CONDITION_ERROR, messageError)
                 return new CreateCollaboratorUseCaseResponse(null, new PreconditionError(messageError))
@@ -61,7 +61,7 @@ class UpdateCollaboratorUseCase {
                     data = await this.repository.updateCollaborator(collaborator)
                 }
 
-                return new UpdateCollaboratorUseCaseResponse(data, null)
+                return await new UpdateCollaboratorUseCaseResponse(data, null)
             }
             else {
                 console.log(TAG_PRE_CONDITION_ERROR, messageError)
@@ -89,7 +89,7 @@ class GetCollaboratorByIDUseCase {
 
             if (!messageError) {
                 const data = await this.repository.getCollaboratorByID(req.ID)
-                return new GetCollaboratorByIDUseCaseResponse(data, null)
+                return  new GetCollaboratorByIDUseCaseResponse(data, null)
             }
             else {
                 console.log(TAG_PRE_CONDITION_ERROR, messageError)
