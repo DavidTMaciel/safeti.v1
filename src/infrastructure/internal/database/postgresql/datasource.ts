@@ -1,8 +1,8 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { CollaboratorModel } from "./model/collaborator";
-import { CompanyModel } from "./model/company";
-require('dotenv').config();
+import { CollaboratorModel } from "./model/collaborator"
+import { CompanyModel } from "./model/company"
+require('dotenv').config()
 
 const AppDataSource = new DataSource({
     type: "postgres",

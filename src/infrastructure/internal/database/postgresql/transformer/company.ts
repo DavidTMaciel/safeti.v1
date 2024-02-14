@@ -1,7 +1,5 @@
-import { CollaboratorEntity } from "../../../../../domain/entity/collaborator";
 import { CompanyEntity } from "../../../../../domain/entity/company"
 import { CompanyModel } from "../model/company"
-import { toCollaboratorEntity, toCollaboratorModel } from "./collaborator"
 
 function toCompanyModel(e: CompanyEntity): CompanyModel {
     return new CompanyModel(e.companyID, e.name, e.cnpj, [], e.createdAt, e.updatedAt);

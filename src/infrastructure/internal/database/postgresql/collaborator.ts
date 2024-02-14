@@ -1,7 +1,7 @@
-import { CollaboratorEntity } from "../../../../domain/entity/collaborator";
-import { AppDataSource } from "./datasource";
-import { CollaboratorModel } from "./model/collaborator";
-import { toCollaboratorEntity, toCollaboratorModel } from "./transformer/collaborator";
+import { CollaboratorEntity } from "../../../../domain/entity/collaborator"
+import { AppDataSource } from "./datasource"
+import { CollaboratorModel } from "./model/collaborator"
+import { toCollaboratorEntity, toCollaboratorModel } from "./transformer/collaborator"
 
 async function createCollaborator(collaborator: CollaboratorEntity): Promise<CollaboratorEntity> {
     const model = toCollaboratorModel(collaborator)
@@ -23,7 +23,7 @@ async function getCollaboratorByID(collaboratorID: number): Promise<Collaborator
         .leftJoinAndSelect("collaborator.company", "company")
         .where("collaborator.ID = :collaboratorID", { collaboratorID })
         .getOne();
-    return collaborator ? toCollaboratorEntity(collaborator) : null;
+    return collaborator ? toCollaboratorEntity(collaborator) : null
 }
 
 async function deleteCollaborator(collaboratorID: number): Promise<void> {
@@ -37,11 +37,9 @@ async function getCollaboratorByCompanyID(companyID: number): Promise<Collaborat
         .createQueryBuilder("collaborator")
         .leftJoinAndSelect("collaborator.company", "company")
         .where("company.companyID = :companyID", { companyID }) // Filtro pelo companyID
-        .getMany();
-    return collaborators ? collaborators.map(collaborator => toCollaboratorEntity(collaborator)) : null;
+        .getMany()
+    return collaborators ? collaborators.map(collaborator => toCollaboratorEntity(collaborator)) : null
 }
-
-
 
 export {
     createCollaborator,

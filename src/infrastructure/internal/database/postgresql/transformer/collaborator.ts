@@ -1,6 +1,6 @@
-import { CollaboratorEntity } from "../../../../../domain/entity/collaborator";
-import { CollaboratorModel } from "../model/collaborator";
-import { toCompanyEntity, toCompanyModel } from "./company";
+import { CollaboratorEntity } from "../../../../../domain/entity/collaborator"
+import { CollaboratorModel } from "../model/collaborator"
+import { toCompanyEntity, toCompanyModel } from "./company"
 
 
 function toCollaboratorModel(e: CollaboratorEntity): CollaboratorModel {
