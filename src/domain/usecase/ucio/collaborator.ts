@@ -1,4 +1,5 @@
 import { CollaboratorEntity } from "../../entity/collaborator"
+import { CompanyEntity } from "../../entity/company"
 import { ErrorEntity } from "../../entity/error"
 
 
@@ -6,9 +7,9 @@ class CreateCollaboratorUseCaseRequest {
     public name: string
     public office: string
     public constructions: string
-    public company: string
+    public company: CompanyEntity
 
-    constructor(name: string, office: string, constructions: string, company: string) {
+    constructor(name: string, office: string, constructions: string, company: CompanyEntity) {
         this.name = name
         this.office = office
         this.constructions = constructions
@@ -31,9 +32,9 @@ class UpdateCollaboratorUseCaseRequest {
     public name: string
     public office: string
     public constructions: string
-    public company: string
+    public company: CompanyEntity
 
-    constructor(ID: number, name: string, office: string, constructions: string, company: string) {
+    constructor(ID: number, name: string, office: string, constructions: string, company: CompanyEntity) {
         this.ID = ID
         this.name = name
         this.office = office
