@@ -1,5 +1,7 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
+import { CollaboratorModel } from "./model/collaborator";
+import { CompanyModel } from "./model/company";
 require('dotenv').config();
 
 const AppDataSource = new DataSource({
@@ -9,7 +11,7 @@ const AppDataSource = new DataSource({
     username: process.env.DB_USER_NAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    entities: [],
+    entities: [CollaboratorModel,CompanyModel],
     synchronize: true,
     logging: false,
 })

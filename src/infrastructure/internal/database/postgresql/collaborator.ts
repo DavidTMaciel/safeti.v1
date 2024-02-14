@@ -17,9 +17,13 @@ async function updateCollaborator(collaborator: CollaboratorEntity): Promise<Col
 }
 
 async function getCollaboratorByID(collaboratorID: number): Promise<CollaboratorEntity | null> {
-    const repository = AppDataSource.getRepository(CollaboratorModel)
-    const collaborator = await repository.findOne({ where: { ID: collaboratorID } })
-    return collaborator ? toCollaboratorEntity(collaborator) : null
+    const repository = AppDataSource.getRepository(CollaboratorModel);
+    const collaborator = await repository
+        .createQueryBuilder("collaborator")
+        .leftJoinAndSelect("collaborator.company", "company")
+        .where("collaborator.ID = :collaboratorID", { collaboratorID })
+        .getOne();
+    return collaborator ? toCollaboratorEntity(collaborator) : null;
 }
 
 async function deleteCollaborator(collaboratorID: number): Promise<void> {
@@ -27,9 +31,22 @@ async function deleteCollaborator(collaboratorID: number): Promise<void> {
     await repository.delete(collaboratorID)
 }
 
+async function getCollaboratorByCompanyID(companyID: number): Promise<CollaboratorEntity[] | null> {
+    const repository = AppDataSource.getRepository(CollaboratorModel);
+    const collaborators = await repository
+        .createQueryBuilder("collaborator")
+        .leftJoinAndSelect("collaborator.company", "company")
+        .where("company.companyID = :companyID", { companyID }) // Filtro pelo companyID
+        .getMany();
+    return collaborators ? collaborators.map(collaborator => toCollaboratorEntity(collaborator)) : null;
+}
+
+
+
 export {
     createCollaborator,
     updateCollaborator,
     getCollaboratorByID,
-    deleteCollaborator
+    deleteCollaborator,
+    getCollaboratorByCompanyID
 }
