@@ -1,6 +1,5 @@
 import { CollaboratorEntity } from "../../entity/collaborator";
 
-
 interface CreateCollaboratorUseCaseRepositoryInterface {
     createCollaborator(metadata: CollaboratorEntity): Promise<CollaboratorEntity>
 }
