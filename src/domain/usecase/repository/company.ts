@@ -11,7 +11,7 @@ interface ListCompanyUseCaseRepositoryInterface {
 }
 
 interface ListCompanyByIDUseCaseRepositoryInterface {
-    //listCompanyByID(companyID: number): Promise<CompanyEntity | null>
+    listCompanyByID(companyID: number): Promise<CompanyEntity | null>
     listCollaboratorByCompanyID(companyID: number):Promise<CollaboratorEntity[]| null>
 }
 
