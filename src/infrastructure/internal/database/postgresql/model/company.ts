@@ -1,7 +1,8 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { CollaboratorModel } from "./collaborator";
 
 @Entity()
+@Unique(["cnpj"])
 class CompanyModel {
     @PrimaryGeneratedColumn()
     public companyID: number | null;

@@ -1,4 +1,5 @@
 import { Router } from "express"    
+import { CreateUserController, UpdateUserController } from "../controller/user"
 
 
 class UserRouter{
@@ -6,9 +7,9 @@ class UserRouter{
 
     constructor(){
         this.router = Router()
-        this.router.post('/createUser')
+        this.router.post('/createUser', new CreateUserController().createUser)
         this.router.post('/getUserByID')
-        this.router.post('/updateUser')
+        this.router.post('/updateUser', new UpdateUserController().updateUser)
         this.router.post('/deleteUser')
     }
 

@@ -2,7 +2,7 @@ import { CompanyEntity } from "../../../../../domain/entity/company"
 import { CompanyModel } from "../model/company"
 
 function toCompanyModel(e: CompanyEntity): CompanyModel {
-    return new CompanyModel(e.companyID, e.name, e.cnpj, [], e.createdAt, e.updatedAt);
+    return new CompanyModel(e.companyID, e.name, e.cnpj, [], e.createdAt, e.updatedAt)
 }
 
 
