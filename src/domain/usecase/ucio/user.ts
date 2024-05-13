@@ -59,10 +59,30 @@ class UpdateUserUseCaseResponse{
     }
 }
 
+class GetUserUseCaseRequest{
+    public userID:number
+    constructor(userID:number){
+        this.userID=userID
+    }
+}
+
+class GetUserUseCaseResponse{
+    public user:UserEntity | null
+    public error:ErrorEntity | null     
+    constructor(user:UserEntity | null, error:ErrorEntity | null){
+        this.user=user
+        this.error=error
+    }
+    }
+
+
 
 export{
     CreateUserUseCaseRequest,
     CreateUserUseCaseResponse,
     UpdateUserUseCaseRequest,
-    UpdateUserUseCaseResponse
+    UpdateUserUseCaseResponse,
+    GetUserUseCaseRequest,
+    GetUserUseCaseResponse
+    
 }

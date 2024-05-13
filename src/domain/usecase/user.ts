@@ -1,8 +1,8 @@
 import { TAG_INTERNAL_SERVER_ERROR, InternalServerError, PreconditionError, TAG_PRE_CONDITION_ERROR } from "../entity/error"
 import { UserEntity } from "../entity/user"
-import { CreateUserUseCaseRepositoryInterface, UpdateUserUseCaseRepositoryInterface } from "./repository/user"
-import { CreateUserUseCaseRequest, CreateUserUseCaseResponse, UpdateUserUseCaseRequest, UpdateUserUseCaseResponse } from "./ucio/user"
-import { CreateUserUseCaseValidateInterface, UpdateUserUseCaseValidateInterface } from "./validate/user"
+import { CreateUserUseCaseRepositoryInterface, GetUserUseCaseRepositoryInterface, UpdateUserUseCaseRepositoryInterface } from "./repository/user"
+import { CreateUserUseCaseRequest, CreateUserUseCaseResponse, GetUserUseCaseRequest, GetUserUseCaseResponse, UpdateUserUseCaseRequest, UpdateUserUseCaseResponse } from "./ucio/user"
+import { CreateUserUseCaseValidateInterface, GetUserUseCaseValidateInterface, UpdateUserUseCaseValidateInterface } from "./validate/user"
 
 class CreateUserUseCase {
     public repository: CreateUserUseCaseRepositoryInterface
@@ -74,8 +74,38 @@ class UpdateUserUseCase {
         }
     }
 }
+class GetUserUseCase{
+    public repository:GetUserUseCaseRepositoryInterface
+    public validate:GetUserUseCaseValidateInterface
+    constructor(repository:GetUserUseCaseRepositoryInterface, validate:GetUserUseCaseValidateInterface){
+        this.repository=repository
+        this.validate=validate
+    }
+    async getUser(req:GetUserUseCaseRequest):Promise<GetUserUseCaseResponse> {
+        try {
+            const messageError=await this.validate.getUser(req)
+            if(!messageError){
+                const user=await this.repository.getUserByUserID(req.userID)
+                return new GetUserUseCaseResponse(user, null)
+            }
+            else{
+                console.log(TAG_PRE_CONDITION_ERROR, messageError)
+                return new GetUserUseCaseResponse(null, new PreconditionError(messageError))
 
+            }
+            
+        } catch (error:any){
+            console.log(TAG_INTERNAL_SERVER_ERROR, error)
+            return new GetUserUseCaseResponse(null, new InternalServerError(error.message))
+
+            
+        }
+    }
+        
+    
+}
 export {
     CreateUserUseCase,
-    UpdateUserUseCase
+    UpdateUserUseCase,
+    GetUserUseCase
 }
